@@ -54,10 +54,16 @@
         <div class="main-content">
             <!-- Input Section -->
             <div class="card">
-                <h2>📝 Analyze Text</h2>
+                <div class="card-header">
+                    <i class="fas fa-edit"></i>
+                    <h2>Analyze Text</h2>
+                </div>
                 
                 <div class="form-group">
-                    <label for="modelSelect">Select Model:</label>
+                    <label for="modelSelect">
+                        <i class="fas fa-robot"></i>
+                        Select Model
+                    </label>
                     <select id="modelSelect" class="input-field">
                         <option value="proposed">Proposed Model (Valence & Arousal)</option>
                         <option value="baseline">Baseline Model (Classification)</option>
@@ -65,69 +71,122 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="textInput">Enter Text:</label>
+                    <label for="textInput">
+                        <i class="fas fa-align-left"></i>
+                        Enter Text
+                    </label>
                     <textarea id="textInput" class="input-field" rows="4" 
                               placeholder="Enter the text you want to analyze..."></textarea>
                 </div>
 
                 <div class="form-group" id="aspectGroup">
-                    <label for="aspectInput">Aspect (Required for Proposed Model):</label>
+                    <label for="aspectInput">
+                        <i class="fas fa-tag"></i>
+                        Aspect <span class="required">(Required for Proposed Model)</span>
+                    </label>
                     <input type="text" id="aspectInput" class="input-field" 
                            placeholder="e.g., environmental_protection, restaurant, laptop">
                 </div>
 
                 <button id="analyzeBtn" class="btn btn-primary">
+                    <i class="fas fa-chart-line"></i>
                     <span id="btnText">Analyze Sentiment</span>
                     <span id="btnLoader" class="loader" style="display: none;"></span>
                 </button>
 
                 <div class="examples">
-                    <p><strong>Example texts:</strong></p>
-                    <button class="example-btn" onclick="loadExample(1)">Example 1</button>
-                    <button class="example-btn" onclick="loadExample(2)">Example 2</button>
-                    <button class="example-btn" onclick="loadExample(3)">Example 3</button>
+                    <div class="examples-header">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Quick Examples</span>
+                    </div>
+                    <div class="examples-grid">
+                        <button class="example-btn" onclick="loadExample(1)">
+                            <i class="fas fa-leaf"></i>
+                            Environmental
+                        </button>
+                        <button class="example-btn" onclick="loadExample(2)">
+                            <i class="fas fa-utensils"></i>
+                            Restaurant
+                        </button>
+                        <button class="example-btn" onclick="loadExample(3)">
+                            <i class="fas fa-laptop"></i>
+                            Technology
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <!-- Results Section -->
             <div class="card" id="resultsCard" style="display: none;">
-                <h2>📊 Analysis Results</h2>
+                <div class="card-header">
+                    <i class="fas fa-chart-bar"></i>
+                    <h2>Analysis Results</h2>
+                </div>
                 <div id="resultsContent"></div>
             </div>
 
             <!-- Batch Analysis Section -->
             <div class="card">
-                <h2>📋 Batch Analysis</h2>
-                <p class="info-text">Upload a CSV file with 'Text' and 'Aspect' columns for batch processing</p>
+                <div class="card-header">
+                    <i class="fas fa-file-csv"></i>
+                    <h2>Batch Analysis</h2>
+                </div>
+                <p class="info-text">
+                    <i class="fas fa-info-circle"></i>
+                    Upload a CSV file with 'Text' and 'Aspect' columns for batch processing
+                </p>
                 
                 <div class="form-group">
-                    <label for="csvInput">Upload CSV File:</label>
-                    <input type="file" id="csvInput" accept=".csv" class="input-field">
+                    <label for="csvInput">
+                        <i class="fas fa-upload"></i>
+                        Upload CSV File
+                    </label>
+                    <input type="file" id="csvInput" accept=".csv" class="input-field file-input">
                 </div>
 
                 <button id="batchAnalyzeBtn" class="btn btn-secondary">
+                    <i class="fas fa-play"></i>
                     Process Batch
                 </button>
 
                 <div id="batchResults" style="display: none;">
-                    <h3>Batch Results</h3>
+                    <h3>
+                        <i class="fas fa-check-circle"></i>
+                        Batch Results
+                    </h3>
                     <div id="batchResultsContent"></div>
-                    <button id="downloadBtn" class="btn btn-success">Download Results</button>
+                    <button id="downloadBtn" class="btn btn-success">
+                        <i class="fas fa-download"></i>
+                        Download Results
+                    </button>
                 </div>
             </div>
 
             <!-- Statistics Section -->
             <div class="card">
-                <h2>📈 Dataset Statistics</h2>
+                <div class="card-header">
+                    <i class="fas fa-chart-pie"></i>
+                    <h2>Dataset Statistics</h2>
+                </div>
                 <div id="statsContent">
-                    <p class="loading">Loading statistics...</p>
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <span>Loading statistics...</span>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Footer -->
         <footer class="footer">
-            <p>Sentiment Analysis Dashboard | Powered by Flask & PyTorch</p>
+            <div class="footer-content">
+                <p>Sentiment Analysis Dashboard</p>
+                <div class="footer-tech">
+                    <span><i class="fab fa-python"></i> Flask</span>
+                    <span><i class="fas fa-fire"></i> PyTorch</span>
+                    <span><i class="fas fa-brain"></i> ML</span>
+                </div>
+            </div>
         </footer>
     </div>
 

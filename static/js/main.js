@@ -34,18 +34,18 @@ async function checkModelStatus() {
         const baselineStatus = document.getElementById('baselineStatus');
         
         if (data.proposed_model) {
-            proposedStatus.textContent = '✓ Active';
+            proposedStatus.innerHTML = '<span class="status-dot"></span><span class="status-text">Active</span>';
             proposedStatus.className = 'status-indicator active';
         } else {
-            proposedStatus.textContent = '✗ Inactive';
+            proposedStatus.innerHTML = '<span class="status-dot"></span><span class="status-text">Inactive</span>';
             proposedStatus.className = 'status-indicator inactive';
         }
         
         if (data.baseline_model) {
-            baselineStatus.textContent = '✓ Active';
+            baselineStatus.innerHTML = '<span class="status-dot"></span><span class="status-text">Active</span>';
             baselineStatus.className = 'status-indicator active';
         } else {
-            baselineStatus.textContent = '✗ Inactive';
+            baselineStatus.innerHTML = '<span class="status-dot"></span><span class="status-text">Inactive</span>';
             baselineStatus.className = 'status-indicator inactive';
         }
     } catch (error) {
@@ -297,13 +297,18 @@ function getSentimentClass(sentiment) {
 function showAlert(message, type = 'info') {
     const alertDiv = document.createElement('div');
     alertDiv.className = `alert alert-${type}`;
-    alertDiv.textContent = message;
+    
+    const icon = type === 'error' ? 'fa-exclamation-circle' : 
+                 type === 'success' ? 'fa-check-circle' : 'fa-info-circle';
+    
+    alertDiv.innerHTML = `<i class="fas ${icon}"></i><span>${message}</span>`;
     
     const mainContent = document.querySelector('.main-content');
     mainContent.insertBefore(alertDiv, mainContent.firstChild);
     
     setTimeout(() => {
-        alertDiv.remove();
+        alertDiv.style.opacity = '0';
+        setTimeout(() => alertDiv.remove(), 300);
     }, 5000);
 }
 
