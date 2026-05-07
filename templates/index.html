@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="animated-background">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <h1>Sentiment Analysis</h1>
+                </div>
+                <p class="subtitle">Advanced ML-powered text sentiment analysis platform</p>
+            </div>
+        </header>
+
+        <!-- Model Status -->
+        <div class="model-status" id="modelStatus">
+            <div class="status-item">
+                <i class="fas fa-microchip"></i>
+                <div class="status-info">
+                    <span class="status-label">Proposed Model</span>
+                    <span class="status-indicator" id="proposedStatus">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Loading...</span>
+                    </span>
+                </div>
+            </div>
+            <div class="status-item">
+                <i class="fas fa-cogs"></i>
+                <div class="status-info">
+                    <span class="status-label">Baseline Model</span>
+                    <span class="status-indicator" id="baselineStatus">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Loading...</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Input Section -->
+            <div class="card">
+                <h2>📝 Analyze Text</h2>
+                
+                <div class="form-group">
+                    <label for="modelSelect">Select Model:</label>
+                    <select id="modelSelect" class="input-field">
+                        <option value="proposed">Proposed Model (Valence & Arousal)</option>
+                        <option value="baseline">Baseline Model (Classification)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="textInput">Enter Text:</label>
+                    <textarea id="textInput" class="input-field" rows="4" 
+                              placeholder="Enter the text you want to analyze..."></textarea>
+                </div>
+
+                <div class="form-group" id="aspectGroup">
+                    <label for="aspectInput">Aspect (Required for Proposed Model):</label>
+                    <input type="text" id="aspectInput" class="input-field" 
+                           placeholder="e.g., environmental_protection, restaurant, laptop">
+                </div>
+
+                <button id="analyzeBtn" class="btn btn-primary">
+                    <span id="btnText">Analyze Sentiment</span>
+                    <span id="btnLoader" class="loader" style="display: none;"></span>
+                </button>
+
+                <div class="examples">
+                    <p><strong>Example texts:</strong></p>
+                    <button class="example-btn" onclick="loadExample(1)">Example 1</button>
+                    <button class="example-btn" onclick="loadExample(2)">Example 2</button>
+                    <button class="example-btn" onclick="loadExample(3)">Example 3</button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="card" id="resultsCard" style="display: none;">
+                <h2>📊 Analysis Results</h2>
+                <div id="resultsContent"></div>
+            </div>
+
+            <!-- Batch Analysis Section -->
+            <div class="card">
+                <h2>📋 Batch Analysis</h2>
+                <p class="info-text">Upload a CSV file with 'Text' and 'Aspect' columns for batch processing</p>
+                
+                <div class="form-group">
+                    <label for="csvInput">Upload CSV File:</label>
+                    <input type="file" id="csvInput" accept=".csv" class="input-field">
+                </div>
+
+                <button id="batchAnalyzeBtn" class="btn btn-secondary">
+                    Process Batch
+                </button>
+
+                <div id="batchResults" style="display: none;">
+                    <h3>Batch Results</h3>
+                    <div id="batchResultsContent"></div>
+                    <button id="downloadBtn" class="btn btn-success">Download Results</button>
+                </div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="card">
+                <h2>📈 Dataset Statistics</h2>
+                <div id="statsContent">
+                    <p class="loading">Loading statistics...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Sentiment Analysis Dashboard | Powered by Flask & PyTorch</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
