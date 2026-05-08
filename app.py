@@ -264,11 +264,29 @@ def statistics():
         print(f"[ERROR] Failed to get statistics: {e}")
         return jsonify({"error": str(e)}), 500
 
+@app.route('/health')
+def health():
+    """Health check endpoint for monitoring"""
+    return jsonify({
+        "status": "healthy",
+        "models": {
+            "proposed": proposed_model is not None,
+            "baseline": baseline_model is not None
+        }
+    })
+
 if __name__ == '__main__':
     # Load models on startup
     load_models()
     
+    # Get port from environment variable (for deployment platforms)
+    port = int(os.getenv('PORT', 5000))
+    
     # Run Flask app
     print("[INFO] Starting Flask server...")
-    print(f"[INFO] Access the application at http://localhost:5000")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    print(f"[INFO] Access the application at http://localhost:{port}")
+    
+    # Use debug=False for production
+    debug_mode = os.getenv('FLASK_ENV', 'production') != 'production'
+    
+    app.run(debug=debug_mode, host='0.0.0.0', port=port)
